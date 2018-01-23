@@ -4,6 +4,8 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import com.example.android.testandroiddev2018.entities.App;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,22 +41,21 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        apps.add(new App("YOUTUBE", "WATCH CONTENT",R.drawable.youtube));
+        /*apps.add(new App("YOUTUBE", "WATCH CONTENT",R.drawable.youtube));
         apps.add(new App("Skype", "TALK CALL",R.drawable.skype));
-        apps.add(new App("ANDRIOD", "HAHAHA",R.drawable.android));
+        apps.add(new App("ANDRIOD", "HAHAHA",R.drawable.android));*/
+        checkAppUsages();
 
         appAdapter = new AppAdapter(this,apps);
         recyclerView.setAdapter(appAdapter);
-        //checkAppUsages();
     }
 
     private void checkAppUsages() {
         UsageStatsManager usageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
-
-        long time = System.currentTimeMillis();
-        long delta = 7 * 24 * 60 * 60 * 1000;
-
-        List<UsageStats> usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, time - delta, time);
+        long currentTime = System.currentTimeMillis();
+        Calendar prevYear = Calendar.getInstance();
+        prevYear.add(Calendar.YEAR, -1);
+        List<UsageStats> usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, prevYear.getTimeInMillis(), currentTime);
 
         Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
         startActivity(intent);
@@ -66,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
             Log.i(APP_TAG, "first time stamp: " + dateFormat.format(stats.getFirstTimeStamp()));
             Log.i(APP_TAG, "last time stamp: " + dateFormat.format(stats.getLastTimeStamp()));
             Log.i(APP_TAG, "total time in foreground: " + stats.getTotalTimeInForeground() + "ms");
+            Drawable icon = null;
+            try {
+                icon = getPackageManager().getApplicationIcon(stats.getPackageName());
+            }
+            catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            apps.add(new App(stats.getPackageName(),
+                    "Last time stamp: " + dateFormat.format(stats.getLastTimeStamp()),
+                    icon));
         }
     }
 }

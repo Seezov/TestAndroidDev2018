@@ -1,14 +1,16 @@
 package com.example.android.testandroiddev2018.entities;
 
+import android.graphics.drawable.Drawable;
+
 public class App {
 
     private String name;
-    private String description;
-    private int image;
+    private String lastTimeStamp;
+    private Drawable image;
 
-    public App(String name, String description, int image) {
+    public App(String name, String lastTimeStamp, Drawable image) {
         this.name = name;
-        this.description = description;
+        this.lastTimeStamp = lastTimeStamp;
         this.image = image;
     }
 
@@ -16,11 +18,11 @@ public class App {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLastTimeStamp() {
+        return lastTimeStamp;
     }
 
-    public int getImage() {
+    public Drawable getImage() {
         return image;
     }
 }
