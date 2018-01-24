@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.DetailedAppInfoActivity"
+            android:name=".activities.DetailedAppInfoActivity"
             android:label="Detailed info">
         </activity>
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

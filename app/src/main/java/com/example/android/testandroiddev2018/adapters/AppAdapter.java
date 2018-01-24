@@ -1,4 +1,4 @@
-package com.example.android.testandroiddev2018;
+package com.example.android.testandroiddev2018.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.android.testandroiddev2018.R;
 import com.example.android.testandroiddev2018.entities.App;
+import com.example.android.testandroiddev2018.listeners.RecyclerViewClickListener;
 
 import java.util.List;
 
