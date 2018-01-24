@@ -30,7 +30,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewClickListener {
 
-    public static final String APP_TAG = "TEST_APP";
+
 
     RecyclerView recyclerView;
     AppAdapter appAdapter;
@@ -56,23 +56,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
     private void checkAppUsages() {
         UsageStatsManager usageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
-        long currentTime = System.currentTimeMillis();
+        Calendar today = Calendar.getInstance();
         Calendar prevYear = Calendar.getInstance();
         prevYear.add(Calendar.YEAR, -1);
-        List<UsageStats> usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, prevYear.getTimeInMillis(), currentTime);
-
-        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-        startActivity(intent);
-
+        List<UsageStats> usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, prevYear.getTimeInMillis(), today.getTimeInMillis());
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
-
+        Drawable icon = null;
         for (UsageStats stats : usageStatsList) {
-            Log.i(APP_TAG, "*********************************************************************");
-            Log.i(APP_TAG, "package name: " + stats.getPackageName());
-            Log.i(APP_TAG, "first time stamp: " + dateFormat.format(stats.getFirstTimeStamp()));
-            Log.i(APP_TAG, "last time stamp: " + dateFormat.format(stats.getLastTimeStamp()));
-            Log.i(APP_TAG, "total time in foreground: " + stats.getTotalTimeInForeground() + "ms");
-            Drawable icon = null;
             try {
                 icon = getPackageManager().getApplicationIcon(stats.getPackageName());
             }
@@ -83,14 +73,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                     "Last time stamp: " + dateFormat.format(stats.getLastTimeStamp()),
                     icon));
         }
+
+
     }
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
         String item = apps.get(position).getName();
-        Toast.makeText(this, item, Toast.LENGTH_LONG).show();
         Intent i = new Intent(getApplicationContext(), DetailedAppInfoActivity.class);
-        i.putExtra("appName","value");
+        i.putExtra("appName",item);
         startActivity(i);
     }
 }

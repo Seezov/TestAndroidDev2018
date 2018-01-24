@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageViewAppImage"
+        android:layout_width="210dp"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:padding="6dp" />
+
+    <TextView
+        android:id="@+id/textViewAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewAppImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="6dp"
+        android:text="NAME OF THE APPLICATION"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/textViewLastTimeUsed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAppName"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:text="LastTimeUsed"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/textViewUsedDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLastTimeUsed"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:text="Used for the last day"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/textViewUsedMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewUsedDay"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:text="Used for the last month"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+    <TextView
+        android:id="@+id/textViewUsedYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewUsedMonth"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:text="Used for the last year"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+</RelativeLayout>
