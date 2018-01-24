@@ -1,4 +1,4 @@
-package com.example.android.testandroiddev2018;
+package com.example.android.testandroiddev2018.Activities;
 
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -11,8 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.CharacterPickerDialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.example.android.testandroiddev2018.AppAdapter;
+import com.example.android.testandroiddev2018.R;
+import com.example.android.testandroiddev2018.RecyclerViewClickListener;
 import com.example.android.testandroiddev2018.entities.App;
 
 import java.text.DateFormat;
@@ -22,7 +28,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewClickListener {
 
     public static final String APP_TAG = "TEST_APP";
 
@@ -41,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        /*apps.add(new App("YOUTUBE", "WATCH CONTENT",R.drawable.youtube));
-        apps.add(new App("Skype", "TALK CALL",R.drawable.skype));
-        apps.add(new App("ANDRIOD", "HAHAHA",R.drawable.android));*/
         checkAppUsages();
 
-        appAdapter = new AppAdapter(this,apps);
+        appAdapter = new AppAdapter(this,apps,this);
         recyclerView.setAdapter(appAdapter);
+
     }
 
     private void checkAppUsages() {
@@ -79,5 +83,14 @@ public class MainActivity extends AppCompatActivity {
                     "Last time stamp: " + dateFormat.format(stats.getLastTimeStamp()),
                     icon));
         }
+    }
+
+    @Override
+    public void recyclerViewListClicked(View v, int position) {
+        String item = apps.get(position).getName();
+        Toast.makeText(this, item, Toast.LENGTH_LONG).show();
+        Intent i = new Intent(getApplicationContext(), DetailedAppInfoActivity.class);
+        i.putExtra("appName","value");
+        startActivity(i);
     }
 }
