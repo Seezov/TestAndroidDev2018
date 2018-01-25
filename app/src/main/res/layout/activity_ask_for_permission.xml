@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="2) You must grand a permission.
-Please use the button below to go to the settigs, allow permission and restart the app"
+Please use the button below to go to the settigs"
             android:textSize="20sp"/>
 
         <Button
