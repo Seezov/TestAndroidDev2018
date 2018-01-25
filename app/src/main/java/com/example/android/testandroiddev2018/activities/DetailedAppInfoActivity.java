@@ -32,9 +32,11 @@ public class DetailedAppInfoActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.datailed_info_layout);
         currentAppName = getIntent().getStringExtra("appName");
+        // We need to get stats separately for all needed time stamps
         UsageStats dailyStats = getInfoAboutApp(currentAppName, UsageStatsManager.INTERVAL_DAILY);
         UsageStats monthlyStats = getInfoAboutApp(currentAppName, UsageStatsManager.INTERVAL_MONTHLY);
         UsageStats yearlyStats = getInfoAboutApp(currentAppName, UsageStatsManager.INTERVAL_YEARLY);
+        // mainStats will be used to get access to app name and icon for the detailed info screen
         UsageStats mainStats = null;
         TextView usedDayTV, usedMonthTV, usedYearTV;
         usedDayTV = findViewById(R.id.textViewUsedDay);
@@ -118,7 +120,7 @@ public class DetailedAppInfoActivity  extends AppCompatActivity {
 
         String desc;
         if (mainStats.getLastTimeUsed() < pastTime.getTimeInMillis()) {
-            desc = "This app had not been used since " + dateFormat.format(pastTime.getTimeInMillis());
+            desc = "Last time used before: " + dateFormat.format(pastTime.getTimeInMillis());
         } else {
             desc = "Last time used: " + dateFormat.format(mainStats.getLastTimeUsed());
         }

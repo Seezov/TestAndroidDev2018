@@ -3,7 +3,6 @@ package com.example.android.testandroiddev2018;
 import android.app.Activity;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 

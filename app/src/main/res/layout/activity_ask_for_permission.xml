@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context="com.example.android.testandroiddev2018.activities.AskForPermissionActivity">
 
     <RelativeLayout
@@ -10,16 +11,20 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true">
 
+        <TextView
+            android:id="@+id/explanationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="2) You must grand a permission.
+Please use the button below to go to the settigs, allow permission and restart the app"
+            android:textSize="20sp"/>
+
         <Button
             android:id="@+id/goToSettingsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter" />
-
-        <Button
-            android:id="@+id/confirmNewPassButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enter" />
+            android:layout_below="@+id/explanationTextView"
+            android:text="Settings" />
     </RelativeLayout>
 </RelativeLayout>

@@ -11,24 +11,30 @@
         android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Apps stats"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.DetailedAppInfoActivity"
             android:label="Detailed info" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+            android:label="Apps list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CreatePasswordActivity" />
-        <activity android:name=".activities.EnterPasswordActivity" />
-        <activity android:name=".activities.SplashActivity"></activity>
-        <activity android:name=".activities.AskForPermissionActivity"></activity>
+        <activity android:name=".activities.CreatePasswordActivity"
+            android:label="Create password"/>
+        <activity android:name=".activities.EnterPasswordActivity"
+            android:label="Enter password"/>
+        <activity
+            android:name=".activities.SplashActivity"
+            android:label="Loading" />
+        <activity
+            android:name=".activities.AskForPermissionActivity"
+            android:label="Allow permission " />
     </application>
 
 </manifest>

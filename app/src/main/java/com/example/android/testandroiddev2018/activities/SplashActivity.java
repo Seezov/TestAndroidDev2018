@@ -12,6 +12,7 @@ public class SplashActivity extends AppCompatActivity {
 
     String pass;
 
+    // Deactivating back button
     @Override
     public void onBackPressed() {
     }
