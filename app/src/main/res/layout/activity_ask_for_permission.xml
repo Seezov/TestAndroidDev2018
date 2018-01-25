@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.testandroiddev2018.activities.AskForPermissionActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <Button
+            android:id="@+id/goToSettingsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter" />
+
+        <Button
+            android:id="@+id/confirmNewPassButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter" />
+    </RelativeLayout>
+</RelativeLayout>
