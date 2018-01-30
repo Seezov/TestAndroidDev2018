@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Rect;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         Drawable icon = null;
         List<String> appNames = new ArrayList<>();
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> pkgAppsList = getPackageManager().queryIntentActivities(mainIntent, 0);
         for (int i = usageStatsList.size() - 1; i >= 0; i--) {
             try {
                 icon = getPackageManager().getApplicationIcon(usageStatsList.get(i).getPackageName());
@@ -100,20 +103,31 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
             } else {
                 desc = "Last time used: " + dateFormat.format(usageStatsList.get(i).getLastTimeUsed());
             }
-
-            App newApp = new App(usageStatsList.get(i).getPackageName(), desc, icon);
-            if (!appNames.contains(newApp.getName())) {
-                appNames.add(newApp.getName());
+            String currentAppName = getAppNameFromPackage(usageStatsList.get(i).getPackageName(),this, pkgAppsList);
+            App newApp = new App(currentAppName, usageStatsList.get(i).getPackageName(), desc, icon);
+            if (!appNames.contains(currentAppName)) {
+                appNames.add(currentAppName);
                 apps.add(newApp);
             }
         }
     }
 
+    static public String getAppNameFromPackage(String packageName, Context context, List<ResolveInfo> pkgAppsList) {
+        for (ResolveInfo app : pkgAppsList) {
+            if (app.activityInfo.packageName.equals(packageName)) {
+                return app.activityInfo.loadLabel(context.getPackageManager()).toString();
+            }
+        }
+        return packageName;
+    }
+
     @Override
     public void recyclerViewListClicked(View v, int position) {
-        String item = apps.get(position).getName();
+        String name = apps.get(position).getName();
+        String packageName = apps.get(position).getPackageName();
         Intent i = new Intent(getApplicationContext(), DetailedAppInfoActivity.class);
-        i.putExtra("appName", item);
+        i.putExtra("appName", name);
+        i.putExtra("appPackageName", packageName);
         startActivity(i);
     }
 }

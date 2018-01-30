@@ -24,6 +24,7 @@ import java.util.Objects;
 public class DetailedAppInfoActivity  extends AppCompatActivity {
 
     String currentAppName;
+    String currentAppPackageName;
     Calendar today;
     Calendar pastTime;
 
@@ -32,10 +33,11 @@ public class DetailedAppInfoActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.datailed_info_layout);
         currentAppName = getIntent().getStringExtra("appName");
+        currentAppPackageName = getIntent().getStringExtra("appPackageName");
         // We need to get stats separately for all needed time stamps
-        UsageStats dailyStats = getInfoAboutApp(currentAppName, UsageStatsManager.INTERVAL_DAILY);
-        UsageStats monthlyStats = getInfoAboutApp(currentAppName, UsageStatsManager.INTERVAL_MONTHLY);
-        UsageStats yearlyStats = getInfoAboutApp(currentAppName, UsageStatsManager.INTERVAL_YEARLY);
+        UsageStats dailyStats = getInfoAboutApp(currentAppPackageName, UsageStatsManager.INTERVAL_DAILY);
+        UsageStats monthlyStats = getInfoAboutApp(currentAppPackageName, UsageStatsManager.INTERVAL_MONTHLY);
+        UsageStats yearlyStats = getInfoAboutApp(currentAppPackageName, UsageStatsManager.INTERVAL_YEARLY);
         // mainStats will be used to get access to app name and icon for the detailed info screen
         UsageStats mainStats = null;
         TextView usedDayTV, usedMonthTV, usedYearTV;
@@ -115,7 +117,7 @@ public class DetailedAppInfoActivity  extends AppCompatActivity {
             e.printStackTrace();
         }
         appImageIM.setImageDrawable(icon);
-        appNameTV.setText(mainStats.getPackageName());
+        appNameTV.setText(currentAppName);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 
         String desc;

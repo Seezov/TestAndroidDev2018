@@ -5,11 +5,13 @@ import android.graphics.drawable.Drawable;
 public class App {
 
     private String name;
+    private String packageName;
     private String lastTimeStamp;
     private Drawable image;
 
-    public App(String name, String lastTimeStamp, Drawable image) {
+    public App(String name, String packageName, String lastTimeStamp, Drawable image) {
         this.name = name;
+        this.packageName = packageName;
         this.lastTimeStamp = lastTimeStamp;
         this.image = image;
     }
@@ -24,5 +26,9 @@ public class App {
 
     public Drawable getImage() {
         return image;
+    }
+
+    public String getPackageName() {
+        return packageName;
     }
 }
